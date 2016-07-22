@@ -1,14 +1,13 @@
-app.post('/pushData', function(req, res){
-var chunk = '';
-
-req.on('data', function(data){
-
-chunk = JSON.parse(data);
-});
-req.on('end',function(){
-
-console.log("name : "+chunk.name + " , phone : "+chunk.phone);
-});
-res.write("OK");
-res.end();
+app.use(express.json());
+app.post('/rest',function(request,response){
+    request.accepts('application/json');
+ 
+    // input message handling
+    json = request.body;
+    console.log('name is :'+json.name);
+    console.log('address is :'+json.address);
+ 
+    // output message
+    response.json({result:'success'});
+ 
 });
